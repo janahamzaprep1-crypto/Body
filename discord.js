@@ -37,8 +37,15 @@ client.on('guildMemberAdd', async member => {
 });
 
 // تنفيذ أمر /org
+const ALLOWED_USER_ID = '1518389009221550100';
+
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
+
+    if (interaction.user.id !== ALLOWED_USER_ID) {
+        await interaction.reply({ content: 'sorry you dont Mr abderahman', ephemeral: true });
+        return;
+    }
 
     if (interaction.commandName === 'org') {
         const channel = await interaction.guild.channels.create({
